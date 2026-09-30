@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Ticket Classification</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Auto Ticket Classification</h1>
+
+    <label>Ticket Description</label>
+
+    <textarea id="ticket"
+        placeholder="Enter your ticket..."></textarea>
+
+    <button onclick="classifyTicket()">
+        Classify Ticket
+    </button>
+
+    <div class="result" id="result">
+        <p><b>Ticket:</b> <span id="ticketOutput"></span></p>
+        <p><b>Category:</b> <span id="categoryOutput"></span></p>
+    </div>
+
+</div>
+
+<script>
+
+function classifyTicket() {
+
+    let ticket = document.getElementById("ticket").value;
+
+    if (ticket.trim() === "") {
+        alert("Please enter a ticket description");
+        return;
+    }
+
+    let category = "";
+
+    let text = ticket.toLowerCase();
+
+    if (text.includes("internet") ||
+        text.includes("wifi") ||
+        text.includes("network")) {
+
+        category = "Network Issue";
+
+    } else if (text.includes("computer") ||
+               text.includes("laptop") ||
+               text.includes("system")) {
+
+        category = "Hardware Issue";
+
+    } else if (text.includes("password") ||
+               text.includes("login") ||
+               text.includes("account")) {
+
+        category = "Access Issue";
+
+    } else if (text.includes("software") ||
+               text.includes("application") ||
+               text.includes("app")) {
+
+        category = "Software Issue";
+
+    } else {
+
+        category = "General Issue";
+    }
+
+    document.getElementById("ticketOutput").innerText = ticket;
+
+    document.getElementById("categoryOutput").innerText = category;
+
+    document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
